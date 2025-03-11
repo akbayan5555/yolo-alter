@@ -1,0 +1,20 @@
+# install YOLOv8
+!pip install ultralytics
+
+# import libraries
+from ultralytics import YOLO
+import cv2
+import torch
+from google.colab.patches import cv2_imshow
+
+device = "cuda" if torch.cuda.is_available() else "cpu"
+print(f"use {device}")
+
+# model yolo8
+model = YOLO("yolov8n.pt").to(device)
+
+results = model("/content/1.jpg")
+results[0].save(filename="/content/1.jpg")
+
+img = cv2.imread("/content/1.jpg")
+cv2_imshow(img)
